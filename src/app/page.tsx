@@ -1,8 +1,13 @@
-import NavbarDesign from '../components/NavbarDesign';
+import Navbar from '../components/Navbar';
+import TitleSplash from '@/components/TitleSplash';
 
 
 export default function Home() {
   return (
-    <NavbarDesign />
+    <div>
+      <Navbar />
+      <TitleSplash />
+    </div>
+    
   )
 }
