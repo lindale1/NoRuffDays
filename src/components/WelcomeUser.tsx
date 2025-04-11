@@ -5,7 +5,7 @@ function WelcomeUser (){
     return (
         <section
         style= {{ backgroundColor: '#8FBFDA' }}
-        className="flex flex-col justify-center items-center px-6 py-40 leading-tight text-center whitespace-nowrap max-md:px-5 max-md:py-24">
+        className="min-h-screen flex flex-col justify-center items-center px-6 py-40 leading-tight text-center whitespace-nowrap max-md:px-5 max-md:py-24 flex-grow">
           <div className="max-w-full w-[316px]">
             <h1 className="text-7xl font-bold tracking-tighter text-stone-900 max-md:text-4xl">
               Welcome
