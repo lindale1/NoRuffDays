@@ -3,6 +3,7 @@ import * as React from "react";
 import Image from "next/image";
 import logo from '../app/assets/logo.jpg';
 
+// Header component for Navbar with log in & sign up and logo
 function Logo () {
   return (
     <div className="flex justify-center items-center">

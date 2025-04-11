@@ -1,9 +1,8 @@
-// Use Link for Sign up ?
-// Text description
 'use client';
 import Image from 'next/image';
 import dog from '../app/assets/dog.png';
 
+// Welcome component contains title, small description, and image
 const Welcome = () => { 
     
     return (

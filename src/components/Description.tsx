@@ -1,4 +1,6 @@
 import Link from 'next/link';
+
+// Description component for bottom text and Sign up button
 const Description = () => {
     return(
         <div className="mt-16 flex justify-center">

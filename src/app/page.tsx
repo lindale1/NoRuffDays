@@ -1,9 +1,8 @@
 import Header from '../components/Header';
 import Welcome from '../components/Welcome';
-import Content from '../components/Content';
 import Description from '../components/Description';
-// Content will have dog image + title
-// Welcome will have sign up button + description
+// Home page view - authenticated
+// Need to add bottom description and fix submit in Description component
 
 export default function Home() {
   return (
