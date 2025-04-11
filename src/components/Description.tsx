@@ -3,7 +3,8 @@ import Link from 'next/link';
 // Description component for bottom text and Sign up button
 const Description = () => {
   return (
-    <div className="mt-6 px-6 bg-slate-800 max-w-3xl">
+    <section className="w-full bg-slate-800 px-6 py-12">
+      <div className="max-w-4xl mx-auto flex flex-col items-start gap-4">
       <div className="flex flex-col items-start gap-4">
         <Link
           href="/signup"
@@ -17,7 +18,8 @@ const Description = () => {
           A daily task checker to keep you motivated while also having the bulldog walk the runway.
         </p>
       </div>
-    </div>
+      </div>
+    </section>
   );
 };
 
