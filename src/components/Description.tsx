@@ -2,14 +2,23 @@ import Link from 'next/link';
 
 // Description component for bottom text and Sign up button
 const Description = () => {
-    return(
-        <div className="mt-16 flex justify-center">
-         <Link
-                 href="/signup"
-                 className="inline-block px-4 py-2 bg-red-600 text-white hover:bg-red-700 transition rounded"
-          >
-                 Sign up
+  return (
+    <div className="mt-6 px-6 bg-slate-800 max-w-3xl">
+      <div className="flex flex-col items-start gap-4">
+        <Link
+          href="/signup"
+          className="px-6 py-3 text-white text-xl font-semibold hover:brightness-110 transition rounded"
+            style={{ backgroundColor: '#8fbfda' }}
+        >
+          Sign up
         </Link>
-        </div>
-    )};
+
+        <p className="text-lg" style={{ color: '#8fbfda' }}>
+          A daily task checker to keep you motivated while also having the bulldog walk the runway.
+        </p>
+      </div>
+    </div>
+  );
+};
+
 export default Description;

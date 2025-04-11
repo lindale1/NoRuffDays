@@ -7,7 +7,7 @@ const Welcome = () => {
     
     return (
     // Adding from Title Splash
-    <section className="flex relative flex-col gap-8 items-center px-6 py-12 bg-slate-800 h-auto pb-16">
+    <section className="flex relative flex-col gap-8 items-center px-6 py-12 bg-slate-800 h-auto">
     <div className="flex relative flex-col gap-2 items-center">
       <h1 className="relative text-7xl font-bold tracking-tighter text-center leading-[86.4px] text-neutral-200 max-md:text-6xl max-sm:text-4xl">
         No Ruff Days
@@ -16,7 +16,7 @@ const Welcome = () => {
         Dress up the bulldog for every task you finish!
       </p>
     </div>
-    <div className="flex justify-center items-center">
+    <div className="mt-4 flex justify-center items-center">
       <Image 
         src={dog}
         width={313}
