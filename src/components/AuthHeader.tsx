@@ -66,6 +66,8 @@ function Header() {
       />
       <header className="flex relative items-center w-full bg-cyan-800 border border-b h-[102px]" style={{ backgroundColor: '#2c6485'}}>
         <MenuDrawer />
+        <div className="flex items-center ">
+        </div>
         <Logo />
          <div className="flex gap-6 items-center ml-8">
         </div>
