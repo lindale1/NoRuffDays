@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import logo from '../app/assets/logo.jpg';
+import logo from '../app/assets/nrd Logo(new).png';
 
 // Header component for Navbar with log in & sign up and logo
 function Logo () {
