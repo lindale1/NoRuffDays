@@ -1,19 +1,21 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import NoRoughDays from "../app/assets/NoRoughDays.jpg";
+import logo from '../app/assets/logo.jpg';
 
-function NavbarLogo({ imageUrl }: { imageUrl: string }) {
+function Logo () {
   return (
-    <img
-      src={imageUrl}
-      alt="Logo"
-      className="w-[91px] h-[91px] absolute left-0 top-[11px]"
-    />
+    <div className="flex justify-center items-center">
+      <Image 
+        src={logo}
+        height={90}
+        alt="No Ruff Days Logo"
+      />
+    </div>
   );
-}
+};
 
-function NavbarButtons() {
+function LogOrSignUp () {
   return (
     <>
     <div className="flex gap-3 items-center ml-6 max-sm:hidden">
@@ -30,7 +32,7 @@ function NavbarButtons() {
   );
 }
 
-function Navbar() {
+function Header() {
   return (
     <>
       <link
@@ -38,13 +40,12 @@ function Navbar() {
         rel="stylesheet"
       />
       <header className="flex relative items-center w-full bg-cyan-800 border border-b h-[102px]" style={{ backgroundColor: '#2c6485'}}>
-        <NavbarLogo imageUrl={NoRoughDays.src} />
+        <Logo />
         <div className="flex gap-6 items-center ml-8">
         </div>
-        <NavbarButtons />
+        <LogOrSignUp />
       </header>
     </>
   );
 }
-
-export default Navbar;
+export default Header;
