@@ -2,6 +2,7 @@
 import * as React from "react";
 import Image from "next/image";
 import logo from '../app/assets/nrd Logo(new).png';
+import Link from 'next/link';
 
 // Header component for Navbar with log in & sign up and logo
 function Logo () {
@@ -20,8 +21,20 @@ function LogOrSignUp () {
   return (
     <>
     <div className="flex gap-3 items-center ml-6 max-sm:hidden">
-      <button className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900">Log in</button>
-      <button className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900">Sign up</button>
+      {/* <button className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900">Log in</button> */}
+      <Link
+      // Needs to change to Welcome page first but just testing task tracker
+          href="/tasktracker"
+          className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
+        >
+          Log in
+        </Link>
+      <Link
+          href="/signup"
+          className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900"
+        >
+          Sign up
+        </Link>
     </div>
     <button
         className="hidden absolute right-4 max-sm:block"
@@ -29,6 +42,7 @@ function LogOrSignUp () {
       >
         <i className="ti ti-menu-2 text-2xl text-white" />
       </button>
+      
     </>
   );
 }

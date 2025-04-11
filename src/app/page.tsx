@@ -4,8 +4,7 @@ import Header from '../components/Header';
 import Welcome from '../components/Welcome';
 import Description from '../components/Description';
 import Footer from '../components/Footer'
-// Home page view - authenticated
-// Need to add bottom description and fix submit in Description component
+// Home page view - non-authenticated
 
 import connectMongoDB from '../../config/mongodb';
 
