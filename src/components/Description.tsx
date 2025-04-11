@@ -15,7 +15,7 @@ const Description = () => {
         </Link>
 
         <p className="text-lg" style={{ color: '#8fbfda' }}>
-          A daily task checker to keep you motivated while also having the bulldog walk the runway.
+          No Ruff Days is a simple, clean to-do list and notepad built for UGA students. Stay organized, manage tasks, and keep track of notes-all in one place.
         </p>
       </div>
       </div>

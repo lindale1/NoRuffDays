@@ -24,7 +24,7 @@ const Welcome = () => {
       </h1>
       <p className={`relative text-3xl leading-10 text-center text-blue-300 max-md:text-3xl max-sm:text-2xl ${playfair.className}`}
       style={{ color: '#2c6485'}}>
-        Dress up the bulldog for every task you finish!
+        Helping Dawgs stay focused-one task at a time!
       </p>
     </div>
     <div className="mt-4 flex justify-center items-center">

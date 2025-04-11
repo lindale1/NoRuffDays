@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
-import logo from '../app/assets/logo.jpg';
+import logo from '../app/assets/nrd Logo(new).png';
 
 // Header component for Navbar with menu, logo, and logout
 function MenuDrawer () {
@@ -69,7 +69,7 @@ function Header() {
         <div className="flex items-center ">
         </div>
         <Logo />
-         <div className="flex gap-6 items-center ml-8">
+         <div className="flex items-center ml-8">
         </div>
         <Logout />
       </header>
