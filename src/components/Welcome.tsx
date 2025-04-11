@@ -22,7 +22,8 @@ const Welcome = () => {
       <h1 className={`relative text-7xl font-bold tracking-tighter text-center leading-[86.4px] text-neutral-200 max-md:text-6xl max-sm:text-4xl ${playfair.className}`}>
         No Ruff Days
       </h1>
-      <p className={`relative text-3xl leading-10 text-center text-blue-300 max-md:text-3xl max-sm:text-2xl ${playfair.className}`}>
+      <p className={`relative text-3xl leading-10 text-center text-blue-300 max-md:text-3xl max-sm:text-2xl ${playfair.className}`}
+      style={{ color: '#2c6485'}}>
         Dress up the bulldog for every task you finish!
       </p>
     </div>
