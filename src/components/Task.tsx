@@ -14,11 +14,12 @@ interface TaskProps {
 // Using cards
 const Task = ({ task, onDelete }: TaskProps) => {
     return (
-        <Card className="flex flex-col items-start p-4">
+        <Card className="flex flex-col items-start p-4 bg-white text-stone-900 rounded-lg shadow-md">
             <h2 className="text-lg font-semibold">{task.title}</h2>
             <p className="text-gray-600">{task.description}</p>
             <button
-                className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                className="px-3 py-2 text-white text-l font-semibold hover:brightness-110 transition rounded"
+                style={{ backgroundColor: '#000000' }}
                 onClick={() => onDelete(task.id)}
             >
                 Delete Task

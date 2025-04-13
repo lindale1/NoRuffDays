@@ -8,10 +8,9 @@ import Tasks from '../../components/Tasks'
 export default function TaskTracker() {
 
   return (
-    <div>
+    <div className="min-h-screen bg-slate-800">
       <AuthHeader />
       <Tasks />
     </div>
-
   )
 }

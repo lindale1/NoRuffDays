@@ -8,9 +8,9 @@ import {useState, useEffect} from 'react';
 // Creating dummy array to statically load 3 items on initial load
 const Tasks = () => {
     const [tasks, setTasks] = useState([
-        { id: 1, title: "Task 1", description: "Complete the task tracker setup" },
-        { id: 2, title: "Task 2", description: "Add dynamic task list functionality" },
-        { id: 3, title: "Task 3", description: "Style the task cards using Tailwind" }
+        { id: 1, title: "Task 1", description: "Dummy task 1" },
+        { id: 2, title: "Task 2", description: "Dummy task 2" },
+        { id: 3, title: "Task 3", description: "Dummy task 3" }
     ]);
 
     // Handle deleting task
@@ -32,8 +32,8 @@ const Tasks = () => {
         <section className="px-6 py-12">
             <div className="container-xl m-auto flex gap-6">
                 {/* Task List */}
-                <div className="w-1/2">
-                    <Card>
+                <div className="w-1/2 " >
+                    <Card className="text-black-200 bg-[#8fbfda] p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4">To Do</h2>
                         {tasks.length === 0 ? (
                             <p>No tasks available.</p>
@@ -48,8 +48,8 @@ const Tasks = () => {
                 </div>
 
                 {/* Completed Tasks */}
-                <div className="w-1/2">
-                    <Card>
+                <div className="w-1/2 bg-[#8fbfda] p-6 rounded-lg shadow-md">
+                    <Card className="bg-white">
                         <h2 className="text-xl font-semibold mb-4">Completed</h2>
                         <p>No tasks have been completed yet.</p>
                     </Card>
@@ -59,7 +59,8 @@ const Tasks = () => {
             {/* Add Task Button */}
             <div className="mt-8 flex justify-center">
                 <button
-                    className="px-6 py-3 bg-green-600 text-white rounded hover:bg-green-700"
+                    className="px-6 py-3 text-white text-xl font-semibold hover:brightness-110 transition rounded"
+                    style={{ backgroundColor: '#8fbfda' }}
                     onClick={handleAddTask}
                 >
                     Add Task

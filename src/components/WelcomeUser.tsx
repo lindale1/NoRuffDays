@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import Link from 'next/link';
 
 function WelcomeUser (){
     return (
@@ -22,7 +23,13 @@ function TasksorJournal() {
     return (
         <>
         <div className="flex gap-3 items-center ml-6 max-sm:hidden">
-          <button className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900">Tasks</button>
+
+          <Link
+          href="/tasktracker"
+          className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
+        >
+          Tasks
+        </Link>
           <button className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900">Journal</button>
         </div>
         <button

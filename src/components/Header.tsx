@@ -23,8 +23,7 @@ function LogOrSignUp () {
     <div className="flex gap-3 items-center ml-6 max-sm:hidden">
       {/* <button className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900">Log in</button> */}
       <Link
-      // Needs to change to Welcome page first but just testing task tracker
-          href="/tasktracker"
+          href="/authenticated"
           className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
         >
           Log in
