@@ -58,13 +58,13 @@ const Tasks = () => {
 
             {/* Add Task Button */}
             <div className="mt-8 flex justify-center">
-                <button
+                <Link
+                    href="/create-task"
                     className="px-6 py-3 text-white text-xl font-semibold hover:brightness-110 transition rounded"
                     style={{ backgroundColor: '#8fbfda' }}
-                    onClick={handleAddTask}
-                >
-                    Add Task
-                </button>
+                    >
+                    Add task
+                </Link>
             </div>
         </section>
     );
