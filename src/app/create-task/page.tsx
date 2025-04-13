@@ -27,7 +27,7 @@ export default function TaskAddForm() {
 
         // Only console.logging right now - go back to UGA items later:
         // POST item - to submit new item form data, make a fetch post
-        // request to send data to endpoint for items (/api/items)
+        // request to send data to endpoint for items (/api/items) from UGA items
         console.log('Created task:', formData);
 
         setFormData({ title: '', description: '', dueDate: '', priority: 'Low'});
