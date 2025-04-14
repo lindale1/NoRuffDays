@@ -1,5 +1,6 @@
 import React from "react";
 import AuthHeader from '../../components/AuthHeader';
+import Footer from '../../components/Footer';
 
 const ContactPage = () => {
   return (
@@ -102,6 +103,7 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
