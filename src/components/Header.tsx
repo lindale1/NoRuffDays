@@ -8,11 +8,13 @@ import Link from 'next/link';
 function Logo () {
   return (
     <div className="flex justify-center items-center">
+      <Link href="/" passHref>
       <Image 
         src={logo}
         height={90}
         alt="No Ruff Days Logo"
       />
+      </Link>
     </div>
   );
 };

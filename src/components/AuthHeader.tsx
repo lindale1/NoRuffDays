@@ -2,6 +2,7 @@
 import * as React from "react";
 import Image from "next/image";
 import logo from '../app/assets/nrd Logo(new).png';
+import Link from 'next/link';
 
 // Header component for Navbar with menu, logo, and logout
 function MenuDrawer () {
@@ -33,11 +34,13 @@ function MenuDrawer () {
 function Logo () {
   return (
     <div className="flex justify-center items-center">
+      <Link href="/" passHref>
       <Image 
         src={logo}
         height={90}
         alt="No Ruff Days Logo"
       />
+      </Link>
     </div>
   );
 };
