@@ -7,17 +7,26 @@ import Link from 'next/link';
 // Header component for Navbar with log in & sign up and logo
 function Logo () {
   return (
-    <div className="flex justify-center items-center">
       <Link href="/" passHref>
       <Image 
         src={logo}
         height={90}
         alt="No Ruff Days Logo"
+        className="cursor-pointer"
       />
       </Link>
-    </div>
   );
 };
+
+function NavLinks() {
+  return (
+    <nav className="flex gap-6 ml-8 text-white font-semibold text-lg max-sm:hidden">
+    <Link href="/" className="hover:underline">Home</Link>
+    <Link href="/contact" className="hover:underline">Contact Us</Link>
+    </nav>
+  )
+}
+
 
 function LogOrSignUp () {
   return (
@@ -56,8 +65,9 @@ function Header() {
         rel="stylesheet"
       />
       <header className="flex relative items-center justify-between w-full bg-cyan-800 border-b border-[#2c6485]" style={{ backgroundColor: '#2c6485'}}>
-        <Logo />
         <div className="flex gap-6 items-center ml-8">
+        <Logo />
+        <NavLinks />
         </div>
         <LogOrSignUp />
       </header>

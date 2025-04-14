@@ -19,6 +19,16 @@ function Logo () {
   );
 };
 
+function NavLinks() {
+  return (
+    <nav className="flex gap-6 ml-8 text-white font-semibold text-lg max-sm:hidden">
+    <Link href="/" className="hover:underline">Home</Link>
+    <Link href="/contact" className="hover:underline">Contact Us</Link>
+    <Link href="/tasktracker" className="hover:underline">Task Tracker</Link>
+    </nav>
+  )
+}
+
 function Logout () {
   return (
     <div className="flex gap-3 items-center ml-6 max-sm:hidden">
@@ -35,7 +45,10 @@ function Header() {
         rel="stylesheet"
       />
       <header className="flex relative items-center justify-between w-full bg-cyan-800 border-b border-[#2c6485]" style={{ backgroundColor: '#2c6485'}}>
+      <div className="flex items-center gap-10">
         <Logo />
+        <NavLinks />
+        </div>
         <Logout />
       </header>
     </>
