@@ -64,7 +64,7 @@ function Header() {
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
         rel="stylesheet"
       />
-      <header className="flex relative items-center w-full bg-cyan-800 border border-b h-[102px]" style={{ backgroundColor: '#2c6485'}}>
+      <header className="flex relative items-center w-full bg-cyan-800 border-b border-[#2c6485]" style={{ backgroundColor: '#2c6485'}}>
         <MenuDrawer />
         <div className="flex items-center ">
         </div>
