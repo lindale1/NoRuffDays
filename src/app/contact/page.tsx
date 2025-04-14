@@ -5,14 +5,14 @@ import Footer from '../../components/Footer';
 const ContactPage = () => {
   return (
     <div>
-      <AuthHeader /> {/*imported*/ }
+      <AuthHeader /> {/*imported*/}
 
       {/* GET IN TOUCH SECTION */}
       <section className="bg-[#1f3b50] text-white py-12 px-4">
         <h2 className="text-3xl font-bold text-center mb-10">GET IN TOUCH</h2>
+        {/*texts to display each information type such as email, phone, and address*/}
         <div className="flex flex-col md:flex-row justify-around items-center gap-8">
           <div className="flex flex-col items-center">
-          {/*simple texts and formatting for email, address, and phone display*/ }
             <div className="text-4xl mb-2">📧</div>
             <p className="font-semibold">Email:</p>
             <p className="text-sm">help@noruftdays.com</p>
@@ -37,8 +37,8 @@ const ContactPage = () => {
         <div className="flex justify-between items-start max-w-5xl mx-auto gap-6 flex-col md:flex-row">
 
           {/* Social Icons */}
+          {/*each icon is also a link that takes you to homepage of sm website*/}
           <div className="text-2xl flex gap-4 mb-4 md:mb-0">
-            {/*The social icons are all links that take you to original homepages of each icon*/ }
             <div className="flex gap-4">
               <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
                 <img src="/instagram-icon.png" alt="Instagram" className="w-6 h-6" />
@@ -54,7 +54,6 @@ const ContactPage = () => {
 
           {/* Form Section */}
           <div className="w-full md:w-2/3">
-          {/*this uses FormSubmitto submit the form to vm84607@uga.edu,without naked email being displayed. */ }
             <h3 className="text-2xl font-bold text-[#1f3b50] mb-4">Message Us:</h3>
             <form
               action="https://formsubmit.co/9d691f8c74ab20aa29487434e438a552"
@@ -112,7 +111,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <Footer />
+      <Footer /> {/*imported*/}
     </div>
   );
 };
