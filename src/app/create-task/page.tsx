@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Card from '../../components/Card';
+import { MongoClient } from 'mongodb';
 // Create-task page
 export default function TaskAddForm() {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ export default function TaskAddForm() {
         description: '',
         dueDate: '',
         priority: 'Low', 
+        imageUrl: '',
       });
 
     const router = useRouter();
@@ -30,7 +32,7 @@ export default function TaskAddForm() {
         // request to send data to endpoint for items (/api/items) from UGA items
         console.log('Created task:', formData);
 
-        setFormData({ title: '', description: '', dueDate: '', priority: 'Low'});
+        setFormData({ title: '', description: '', dueDate: '', priority: 'Low', imageUrl: '',});
         router.push('/tasktracker');
     }; // handleSubmit
 
@@ -73,6 +75,14 @@ export default function TaskAddForm() {
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
               </select>
+              <input
+                name="imageUrl"
+                type="url"
+                value={formData.imageUrl}
+                onChange={handleChange}
+                placeholder="Image URL"
+                className="w-full p-2 border border-gray-300 rounded"
+              />
               <div className="flex justify-end">
                 <button
                   type="submit"

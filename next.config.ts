@@ -5,3 +5,10 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+// Allowing unsplash
+module.exports = {
+  images: {
+    domains: ['images.unsplash.com'], // Add your domain here
+  },
+}

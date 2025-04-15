@@ -2,15 +2,16 @@
 import Task from "./Task";
 import Link from 'next/link';
 import Card from './Card';
+import Image from 'next/image';
 import {useState, useEffect} from 'react';
 // Tasks component - similar to Items component in UGA items
 
 // Creating dummy array to statically load 3 items on initial load
 const Tasks = () => {
     const [tasks, setTasks] = useState([
-        { id: 1, title: "Task 1", description: "Dummy task 1" },
-        { id: 2, title: "Task 2", description: "Dummy task 2" },
-        { id: 3, title: "Task 3", description: "Dummy task 3" }
+        { id: 1, title: "Task 1", description: "Clean house", imageUrl:"https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q2xlYW58ZW58MHx8MHx8fDI%3D" },
+        { id: 2, title: "Task 2", description: "Do homework", imageUrl:"https://images.unsplash.com/photo-1601397922721-4326ae07bbc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZXdvcmt8ZW58MHx8MHx8fDI%3D"},
+        { id: 3, title: "Task 3", description: "Buy groceries", imageUrl:"https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3JvY2VyaWVzfGVufDB8fDB8fHww"}
     ]);
 
 const [completedTasks, setCompletedTasks] = useState<any[]>([]);
@@ -28,9 +29,9 @@ const [completedTasks, setCompletedTasks] = useState<any[]>([]);
         }
     };
 
-    const handleEdit = (id: number, newTitle: string, newDescription: string) => {
+    const handleEdit = (id: number, newTitle: string, newDescription: string, newImage: string) => {
         setTasks(tasks.map(task =>
-            task.id === id ? { ...task, title: newTitle, description: newDescription } : task
+            task.id === id ? { ...task, title: newTitle, description: newDescription, imageUrl: newImage } : task
         ));
     };
 
