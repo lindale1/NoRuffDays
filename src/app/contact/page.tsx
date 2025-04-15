@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import AuthHeader from '../../components/AuthHeader';
+import Header from "@/components/Header";
 import Footer from '../../components/Footer';
 
 const ContactPage = () => {
@@ -36,7 +36,7 @@ const ContactPage = () => {
 
   return (
     <div>
-      <AuthHeader />
+      <Header />
 
       {/* GET IN TOUCH SECTION */}
       <section className="bg-[#1f3b50] text-white py-12 px-4">

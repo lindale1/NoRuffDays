@@ -1,4 +1,4 @@
-import AuthHeader from '../../components/AuthHeader';
+import Header from '@/components/Header';
 import WelcomeUser from '../../components/WelcomeUser';
 import Footer from '../../components/Footer'
 // Home page view - authenticated
@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 export default function Home() {
   return (
     <div>
-      <AuthHeader />
+      <Header />
       <WelcomeUser />
       <Footer />
     </div>
