@@ -40,7 +40,8 @@ const [completedTasks, setCompletedTasks] = useState<any[]>([]);
         const newTask = {
             id: tasks.length + 1,
             title: `New Task ${tasks.length + 1}`,
-            description: "This is a dynamically added task."
+            description: "This is a dynamically added task.",
+            imageUrl:""
         };
         setTasks([...tasks, newTask]);
     };

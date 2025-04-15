@@ -8,11 +8,11 @@ interface TaskProps {
         id: number;
         title: string;
         description: string;
-        imageUrl: string;
+        imageUrl?: string;
     };
     onDelete: (id: number) => void; // Function to handle task deletion
     onComplete: (id: number) => void;
-    onEdit: (id: number, newTitle: string, newDescription: string) => void
+    onEdit: (id: number, newTitle: string, newDescription: string, newImage:string) => void
 }
 
 // Using cards
@@ -20,9 +20,10 @@ const Task = ({ task, onDelete, onComplete, onEdit }: TaskProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
+    const [imageUrl, setImage] = useState(task.imageUrl);
 
     const handleSave = () => {
-        onEdit(task.id, title, description);
+        onEdit(task.id, title, description, imageUrl);
         setIsEditing(false);
     };
 
