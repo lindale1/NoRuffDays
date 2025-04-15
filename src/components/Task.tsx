@@ -8,6 +8,7 @@ interface TaskProps {
         id: number;
         title: string;
         description: string;
+        imageUrl: string;
     };
     onDelete: (id: number) => void; // Function to handle task deletion
     onComplete: (id: number) => void;
@@ -27,6 +28,13 @@ const Task = ({ task, onDelete, onComplete, onEdit }: TaskProps) => {
 
     return (
         <Card className="flex flex-col items-start p-4 bg-white text-stone-900 rounded-lg shadow-md">
+            {/* Adding image to each task */}
+            {task.imageUrl && (
+                <div className="w-full h-48 relative mb-4">
+                    <Image src={task.imageUrl} alt={task.title}  fill className="object-cover rounded-md" />
+                </div>
+            )}
+
             {isEditing ? (
                 <>
                     <input
