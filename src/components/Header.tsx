@@ -4,6 +4,8 @@ import Image from "next/image";
 import logo from '../app/assets/nrd Logo(new).png';
 import Link from 'next/link';
 
+import { useRouter } from 'next/navigation';
+
 interface LogInSignUpProps {
   onLogin: () => void;
 }
@@ -73,6 +75,8 @@ function Logout({ onLogout }: LogoutProps) {
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
+  const router = useRouter();
+
   React.useEffect(() => {
     const storedLoginState = localStorage.getItem('isLoggedIn');
     if (storedLoginState === 'true') {
@@ -88,6 +92,7 @@ function Header() {
   const handleLogout = () => {
     setIsLoggedIn(false);  // Set logged out state when logout button is clicked
     localStorage.setItem('isLoggedIn', 'false');
+    router.push('/');
   };
 
   return (
