@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+console.log("Bruh it working Hunny");
+
 
 
 const connectMongoDB = async (): Promise<void> => {

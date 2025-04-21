@@ -1,29 +1,32 @@
+// Task component - similar to Item component from UGA items
 import Image from "next/image";
 import Card from "./Card";
 import Link from "next/link";
 import { useState } from 'react';
-// Task component - similar to Item component from UGA items
+
+// Creating interface for TypeScript
 interface TaskProps {
     task: {
-        id: number;
+        _id: string;
         title: string;
         description: string;
         imageUrl?: string;
+        completed: boolean;
     };
-    onDelete: (id: number) => void; // Function to handle task deletion
-    onComplete: (id: number) => void;
-    onEdit: (id: number, newTitle: string, newDescription: string, newImage:string) => void
-}
+    onDelete: (id: string) => void; // Function to handle task deletion
+    onComplete: (id: string) => void;
+    onEdit: (id: string, newTitle: string, newDescription: string, newImage:string) => void
+} // TaskProps
 
-// Using cards
+// Using a card for each task 
 const Task = ({ task, onDelete, onComplete, onEdit }: TaskProps) => {
     const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState(task.title);
     const [description, setDescription] = useState(task.description);
     const [imageUrl, setImage] = useState(task.imageUrl);
-
+    // Save all edits on a task card
     const handleSave = () => {
-        onEdit(task.id, title, description, imageUrl);
+        onEdit(task._id, title, description, imageUrl || '');
         setIsEditing(false);
     };
 
@@ -71,13 +74,13 @@ const Task = ({ task, onDelete, onComplete, onEdit }: TaskProps) => {
                 </button>
                 <button
                     className="px-2 py-1 text-sm bg-blue-600 text-white rounded"
-                    onClick={() => onComplete(task.id)}
+                    onClick={() => onComplete(task._id)}
                 >
                     Mark Complete
                 </button>
                 <button
                     className="px-2 py-1 text-sm bg-red-600 text-white rounded"
-                    onClick={() => onDelete(task.id)}
+                    onClick={() => onDelete(task._id)}
                 >
                     Delete
                 </button>
