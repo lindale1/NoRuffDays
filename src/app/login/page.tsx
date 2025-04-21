@@ -1,12 +1,9 @@
-import Login from '../../components/Login';
+import Login from "../../components/Login";
 
-// Login form
-
-export default function Home() {
+export default function LoginPage() {
   return (
     <div>
-      <Login />
+      <Login />  {/* This will be a client-side rendered component */}
     </div>
-    
-  )
+  );
 }

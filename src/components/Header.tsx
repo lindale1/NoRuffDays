@@ -1,69 +1,44 @@
 "use client";
-import * as React from "react";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import logo from '../app/assets/nrd Logo(new).png';
-import Link from 'next/link';
-
-import { useRouter } from 'next/navigation';
-
-interface LogInSignUpProps {
-  onLogin: () => void;
-}
+import logo from "../app/assets/nrd Logo(new).png";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession, signOut, SessionProvider } from "next-auth/react";
 
 interface LogoutProps {
   onLogout: () => void;
 }
 
-// Header component for Navbar with log in & sign up and logo
-function Logo () {
+function Logo() {
   return (
-      <Link href="/" passHref>
-      <Image 
+    <Link href="/" passHref>
+      <Image
         src={logo}
         height={90}
         alt="No Ruff Days Logo"
         className="cursor-pointer"
       />
-      </Link>
+    </Link>
   );
-};
+}
 
 function NavLinks() {
   return (
     <nav className="flex gap-6 ml-8 text-white font-semibold text-lg max-sm:hidden">
-    <Link href="/" className="hover:underline">Home</Link>
-    <Link href="/contact" className="hover:underline">Contact Us</Link>
-    <Link href="/tasktracker" className="hover:underline">Task Tracker</Link>
+      <Link href="/" className="hover:underline">Home</Link>
+      <Link href="/contact" className="hover:underline">Contact Us</Link>
+      <Link href="/tasktracker" className="hover:underline">Task Tracker</Link>
     </nav>
-
-  )
-}
-
-
-function LogOrSignUp({ onLogin }: LogInSignUpProps) {
-  return (
-    <div className="flex gap-3 items-center ml-6 max-sm:hidden">
-      <button 
-        onClick={onLogin} 
-        className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
-      >
-        Log in
-      </button>
-      <Link
-        href="/signup"
-        className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900"
-      >
-        Sign up
-      </Link>
-    </div>
   );
 }
 
 function Logout({ onLogout }: LogoutProps) {
   return (
     <div className="flex gap-3 items-center ml-6 max-sm:hidden">
-      <button 
-        onClick={onLogout} 
+      <button
+        onClick={onLogout}
         className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
       >
         Logout
@@ -72,47 +47,55 @@ function Logout({ onLogout }: LogoutProps) {
   );
 }
 
-function Header() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
+function HeaderContent() {
+  const { data: session } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  React.useEffect(() => {
-    const storedLoginState = localStorage.getItem('isLoggedIn');
-    if (storedLoginState === 'true') {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  useEffect(() => {
+    setIsLoggedIn(!!session?.user);
+  }, [session]);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);  // Set logged in state to true when login button is clicked
-    localStorage.setItem('isLoggedIn', 'true');
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);  // Set logged out state when logout button is clicked
-    localStorage.setItem('isLoggedIn', 'false');
-    router.push('/');
+  const handleLogout = async () => {
+    setIsLoggedIn(false);
+    await signOut({ redirect: true, callbackUrl: "/" });
   };
 
   return (
-    <>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-        rel="stylesheet"
-      />
-      <header className="flex relative items-center justify-between w-full bg-cyan-800 border-b border-[#2c6485]" style={{ backgroundColor: '#2c6485'}}>
-        <div className="flex gap-6 items-center ml-8">
-          <Logo />
-          <NavLinks />
+    <header
+      className="flex relative items-center justify-between w-full bg-cyan-800 border-b border-[#2c6485]"
+      style={{ backgroundColor: "#2c6485" }}
+    >
+      <div className="flex gap-6 items-center ml-8">
+        <Logo />
+        <NavLinks />
+      </div>
+      {isLoggedIn ? (
+        <Logout onLogout={handleLogout} />
+      ) : (
+        <div className="flex gap-3 items-center ml-6 max-sm:hidden">
+          <Link
+            href="/login"
+            className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
+          >
+            Log in
+          </Link>
+          <Link
+            href="/signup"
+            className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900"
+          >
+            Sign up
+          </Link>
         </div>
-        {isLoggedIn ? (
-          <Logout onLogout={handleLogout} />  // Show Logout if logged in
-        ) : (
-          <LogOrSignUp onLogin={handleLogin} />  // Show Log In and Sign Up if not logged in
-        )}
-      </header>
-    </>
+      )}
+    </header>
   );
 }
-export default Header;
+
+export default function Header() {
+  return (
+    <SessionProvider>
+      <HeaderContent />
+    </SessionProvider>
+  );
+}
