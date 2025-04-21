@@ -33,7 +33,7 @@ function Login() {
       setLoading(false);
       return;
     } 
-    router.push("/welcomeuser");
+    router.push("/");
     setLoading(false);
   };
 

@@ -48,16 +48,11 @@ function Logout({ onLogout }: LogoutProps) {
 }
 
 function HeaderContent() {
-  const { data: session } = useSession();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: session, status } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    setIsLoggedIn(!!session?.user);
-  }, [session]);
+  const username = session?.user?.name;
 
   const handleLogout = async () => {
-    setIsLoggedIn(false);
     await signOut({ redirect: true, callbackUrl: "/" });
   };
 
@@ -70,27 +65,41 @@ function HeaderContent() {
         <Logo />
         <NavLinks />
       </div>
-      {isLoggedIn ? (
-        <Logout onLogout={handleLogout} />
-      ) : (
-        <div className="flex gap-3 items-center ml-6 max-sm:hidden">
-          <Link
-            href="/login"
-            className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900"
-          >
-            Sign up
-          </Link>
-        </div>
-      )}
+
+      <div className="flex gap-3 items-center ml-6 max-sm:hidden mr-6">
+        {status === "loading" ? (
+          <p className="text-white font-semibold">Loading...</p>
+        ) : session?.user ? (
+          <>
+            <p className="text-white font-semibold">Welcome, {username}</p>
+            <button
+              onClick={handleLogout}
+              className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              href="/login"
+              className="p-2 text-base font-bold rounded-lg border border-solid bg-white bg-opacity-90 text-stone-900"
+            >
+              Log in
+            </Link>
+            <Link
+              href="/signup"
+              className="p-2 text-base font-bold text-white rounded-lg border border-solid bg-stone-900 border-stone-900"
+            >
+              Sign up
+            </Link>
+          </>
+        )}
+      </div>
     </header>
   );
 }
+
 
 export default function Header() {
   return (
