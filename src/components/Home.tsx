@@ -1,3 +1,6 @@
+import connectMongoDB from "../../config/mongodb";
+
 export default function Home() {
-    connectMongoDB();
+    connectMongoDB
 return;
+}
