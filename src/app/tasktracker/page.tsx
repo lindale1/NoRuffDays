@@ -1,14 +1,17 @@
-// Page for task tracker client route
+// Page for task tracker where we can add code from 
+
 "use client";
 
 import { useEffect, useState } from 'react';
-import Header from '@/components/Header';
-import Tasks from '../../components/Tasks'
+import AuthHeader from '../../components/AuthHeader';
+import Tasks from '../../components/Tasks';
 
 export default function TaskTracker() {
   const [currentTime, setCurrentTime] = useState('');
   const [currentDate, setCurrentDate] = useState('');
-  // date is displayed with JavaScript
+  const [advice, setAdvice] = useState('');
+
+  // current date 
   useEffect(() => {
     const now = new Date();
     const formattedDate = now.toLocaleDateString(undefined, {
@@ -20,7 +23,7 @@ export default function TaskTracker() {
     setCurrentDate(formattedDate);
   }, []);
 
-  // time dispalyed with API
+  // fetch current time every minute update
   useEffect(() => {
     const fetchTime = async () => {
       try {
@@ -34,20 +37,45 @@ export default function TaskTracker() {
     };
 
     fetchTime();
-    const interval = setInterval(fetchTime, 60000); // this is so it constantly updates
+    const interval = setInterval(fetchTime, 60000); // update every minute
     return () => clearInterval(interval);
+  }, []);
+
+  // all to fetch and utilize api to get life adivce quote evrry hour
+  useEffect(() => {
+    const fetchAdvice = async () => {
+      try {
+        const response = await fetch("https://api.adviceslip.com/advice");
+        const data = await response.json();
+        setAdvice(data.slip.advice);
+      } catch (error) {
+        console.error("Failed to fetch advice:", error);
+        setAdvice("Take it one step at a time.");
+      }
+    };
+
+    fetchAdvice(); 
+    const interval = setInterval(fetchAdvice, 3600000); // update every hour
+
+    return () => clearInterval(interval); // clears interval
   }, []);
 
   return (
     <div className="min-h-screen bg-slate-800 text-white">
-      <Header />
+      <AuthHeader />
       <div className="text-center p-4 text-lg font-semibold bg-slate-700 space-y-1">
-        {/*Display Date */}
-        <div>{currentDate}</div> 
-        {/*Display time with API */}
+        {/* date */}
+        <div>{currentDate}</div>
+        {/* time */}
         <div>Current Time: {currentTime} EDT</div>
       </div>
+
       <Tasks />
+
+      {/* life advice diaplayed here */}
+      <div className="p-4 text-center italic bg-slate-700 mt-4">
+        <p className="text-base">🧠 Advice of the hour: "{advice}"</p>
+      </div>
     </div>
   );
 }
