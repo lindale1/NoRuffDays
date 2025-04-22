@@ -1,50 +1,139 @@
+// Tasks component - similar to Items component in UGA items
 'use client'
 import Task from "./Task";
 import Link from 'next/link';
 import Card from './Card';
 import Image from 'next/image';
 import {useState, useEffect} from 'react';
-// Tasks component - similar to Items component in UGA items
 
-// Creating dummy array to statically load 3 items on initial load
+// Creating interface for TypeScript
+interface TaskType {
+    _id: string;
+    title: string;
+    description: string;
+    imageUrl?: string;
+    completed: boolean;
+} // TaskType 
+
 const Tasks = () => {
-    const [tasks, setTasks] = useState([
-        { id: 1, title: "Task 1", description: "Clean house", imageUrl:"https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q2xlYW58ZW58MHx8MHx8fDI%3D" },
-        { id: 2, title: "Task 2", description: "Do homework", imageUrl:"https://images.unsplash.com/photo-1601397922721-4326ae07bbc5?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZXdvcmt8ZW58MHx8MHx8fDI%3D"},
-        { id: 3, title: "Task 3", description: "Buy groceries", imageUrl:"https://images.unsplash.com/photo-1588964895597-cfccd6e2dbf9?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z3JvY2VyaWVzfGVufDB8fDB8fHww"}
-    ]);
+     // Storing tasks
+    const [tasks, setTasks] = useState<TaskType[]>([]);
+    // Fetch tasks on /api/tasks route 
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await fetch('/api/tasks');
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                } // if
+                const data = await response.json();
+                 setTasks(data.tasks);
+            } catch (error) {
+                console.log('Error fetching tasks:', error);
+            } // try-catch
+            }; // fetchTasks
+        fetchTasks();
+    }, []); // useEffect
 
-const [completedTasks, setCompletedTasks] = useState<any[]>([]);
+    // Handle deleting task using ID
+    const handleDelete = async (id: number) => {
+         try {
+            const path = await fetch(`/api/tasks/${id}`, {
+             method: 'DELETE',
+            }); // path using DELETE method 
+          
+            if (!path.ok) throw new Error('Delete failed');
+          
+            // Remove task from state after deleting it
+            setTasks(tasks.filter(task => task._id !== id));
+        } catch (error) {
+            console.error('Error deleting task:', error);
+        } // try-catch
+    }; // handleDelete
+        
+    // Marking a task as completed properly
+    const handleComplete = async (id: string) => {
+        try {
+            // Fixing completed bug by finding task locally
+            const taskToComplete = tasks.find(task => task._id === id);
+            if (!taskToComplete) return;
 
-    // Handle deleting task
-    const handleDelete = (id: number) => {
-        setTasks(tasks.filter(task => task.id !== id));
-    };
+            const path = await fetch(`/api/tasks/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                title: taskToComplete.title,
+                description: taskToComplete.description,
+                imageUrl: taskToComplete.imageUrl, 
+                completed: true }),
+            }); // path
+          
+            if (!path.ok) throw new Error('Failed to mark task complete');
+          
+            // Update the task locally after successful DB update
+            setTasks(tasks.map(task =>
+                 task._id === id ? { ...task, completed: true } : task
+            )); // setTasks
+        } catch (error) {
+            console.error('Error completing task:', error);
+        } // try-catch
+    }; // handleComplete
 
-    const handleComplete = (id: number) => {
-        const completed = tasks.find(task => task.id === id);
-        if (completed) {
-            setCompletedTasks([...completedTasks, completed]);
-            setTasks(tasks.filter(task => task.id !== id));
-        }
-    };
+    // Editing a task 
+    const handleEdit = async (id: string, newTitle: string, newDescription: string, newImage: string) => {
+        try {
+            const path = await fetch(`/api/tasks/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                title: newTitle,
+                description: newDescription,
+                imageUrl: newImage,
+                }),
+            }); // path
+          
+            if (!path.ok) throw new Error('Edit failed');
+          
+            // Update task in state
+            setTasks(tasks.map(task =>
+                task._id === id
+                ? { ...task, title: newTitle, description: newDescription, imageUrl: newImage }
+                : task
+            )); // setTasks
+        } catch (error) {
+            console.error('Error editing task:', error);
+        } // try-catch
+    }; // handleEdit
 
-    const handleEdit = (id: number, newTitle: string, newDescription: string, newImage: string) => {
-        setTasks(tasks.map(task =>
-            task.id === id ? { ...task, title: newTitle, description: newDescription, imageUrl: newImage } : task
-        ));
-    };
-
-    // Handle adding a new task
-    const handleAddTask = () => {
-        const newTask = {
-            id: tasks.length + 1,
+    // Handle adding a new task for Add Task button
+    const handleAddTask = async () => {
+        // Creating new task
+         const newTask = {
             title: `New Task ${tasks.length + 1}`,
             description: "This is a dynamically added task.",
-            imageUrl:""
+            imageUrl:"", 
+            completed: false,
         };
-        setTasks([...tasks, newTask]);
-    };
+        try {
+            const response = await fetch('/api/tasks', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newTask),
+            }); // response
+    
+            if (!response.ok) throw new Error('Failed to add task');
+    
+            const addedTask = await response.json();
+            // Add newly created task
+            setTasks([...tasks, addedTask]); 
+        } catch (error) {
+            console.error('Error adding task:', error);
+        } // try-catch
+    }; // handleAddTask
+
+    // Divide tasks into completed and not completed
+    const toDoTasks = tasks.filter(task => !task.completed);
+    const completedTasks = tasks.filter(task => task.completed);
 
     return (
         <section className="px-6 py-12">
@@ -53,59 +142,55 @@ const [completedTasks, setCompletedTasks] = useState<any[]>([]);
                 <div className="w-1/2 " >
                     <Card className="text-black-200 bg-[#8fbfda] p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4">To Do</h2>
-                        {tasks.length === 0 ? (
-                            <p>No tasks available.</p>
-                        ) : (
-                            <div className="space-y-4">
-                                {tasks.map((task) => (
-                                    <Task 
-                                    key={task.id} 
-                                    task={task} 
-                                    onDelete={handleDelete} 
-                                    onComplete={handleComplete}
-                                    onEdit={handleEdit}
-                                    />
-                                ))}
-                            </div>
-                        )}
+                            {tasks.length === 0 ? (
+                                <p>No tasks available.</p>
+                            ) : (
+                                <div className="space-y-4">
+                                    {toDoTasks.map((task) => (
+                                        <Task 
+                                        key={task._id} 
+                                        task={task} 
+                                        onDelete={handleDelete} 
+                                        onComplete={handleComplete}
+                                        onEdit={handleEdit}
+                                        />
+                                    ))}
+                                </div>
+                            )}
                     </Card>
-                </div>
-            
-                 {/* Completed Tasks */}
-                 <div className="w-1/2">
+                    </div>
+                
+                {/* Completed Tasks */}
+                <div className="w-1/2">
                     <Card className="text-black-200 bg-[#8fbfda] p-6 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4">Completed</h2>
                         {completedTasks.length === 0 ? (
-                            <p>No tasks have been completed yet.</p>
-                        ) : (
-                            <div className="space-y-4">
-                                {completedTasks.map(task => (
-                                    <Card key={task.id} className="p-4 bg-white rounded-lg shadow-md">
-                                        <h2 className="text-lg font-semibold line-through">{task.title}</h2>
-                                        <p className="text-gray-600">{task.description}</p>
-                                    </Card>
-                                ))}
-                            </div>
-                        )}
+                                <p>No tasks have been completed yet.</p>
+                            ) : (
+                                <div className="space-y-4">
+                                    {completedTasks.map(task => (
+                                        <Card key={task._id} className="p-4 bg-white rounded-lg shadow-md">
+                                            <h2 className="text-lg font-semibold line-through">{task.title}</h2>
+                                            <p className="text-gray-600">{task.description}</p>
+                                        </Card>
+                                    ))}
+                                </div>
+                            )}
                     </Card>
                 </div>
             </div>
 
-
-
-
             {/* Add Task Button */}
-            <div className="mt-8 flex justify-center">
-                <Link
-                    href="/create-task"
-                    className="px-6 py-3 text-white text-xl font-semibold hover:brightness-110 transition rounded"
-                    style={{ backgroundColor: '#8fbfda' }}
-                    >
-                    Add task
-                </Link>
-            </div>
-        </section>
-    );
-};
-
+                <div className="mt-8 flex justify-center">
+                    <Link
+                        href="/create-task"
+                        className="px-6 py-3 text-white text-xl font-semibold hover:brightness-110 transition rounded"
+                        style={{ backgroundColor: '#8fbfda' }}
+                        >
+                        Add task
+                    </Link>
+                </div>
+    </section>
+    ); // return
+}; // Tasks
 export default Tasks;

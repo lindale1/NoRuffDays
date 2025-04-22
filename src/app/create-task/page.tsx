@@ -27,13 +27,30 @@ export default function TaskAddForm() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Only console.logging right now - go back to UGA items later:
-        // POST item - to submit new item form data, make a fetch post
-        // request to send data to endpoint for items (/api/items) from UGA items
-        console.log('Created task:', formData);
 
-        setFormData({ title: '', description: '', dueDate: '', priority: 'Low', imageUrl: '',});
-        router.push('/tasktracker');
+        try {
+          const response = await fetch('/api/tasks', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+          // HERE: Log full response
+          console.log("Response status:", response.status);
+          const resBody = await response.json().catch(() => ({}));
+          console.log("Response body:", resBody);
+      
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+    
+          setFormData({  title: '', description: '', dueDate: '', priority: 'Low', imageUrl: '' });
+          // Changed this
+          router.push('/tasktracker');
+        } catch (error) {
+          console.error('Error in CreateTask!', error);
+        }
     }; // handleSubmit
 
     return (
