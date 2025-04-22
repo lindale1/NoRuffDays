@@ -15,7 +15,7 @@ const Description = () => {
         </Link>
 
         <p className="text-lg" style={{ color: '#8fbfda' }}>
-          No Ruff Days is a simple, clean to-do list and notepad built for UGA students. Stay organized, manage tasks, and keep track of notes-all in one place.
+          No Ruff Days is a simple, clean to-do list built for UGA students. Stay organized and manage tasks in one place.
         </p>
       </div>
       </div>
