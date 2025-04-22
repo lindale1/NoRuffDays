@@ -1,5 +1,6 @@
+// Using middleware to restrict certain routes
 import { NextRequest, NextResponse } from "next/server";
-import { authConfig } from "./auth.congig";
+import { authConfig } from "./auth.config";
 import NextAuth from "next-auth";
 
 const { auth } = NextAuth(authConfig);

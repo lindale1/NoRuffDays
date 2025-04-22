@@ -1,4 +1,4 @@
-// Page for task tracker where we can add code from 
+// Page for task tracker client route
 "use client";
 
 import { useEffect, useState } from 'react';

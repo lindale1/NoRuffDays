@@ -1,3 +1,4 @@
+// Page for /signup client route
 import Signup from '../../components/Signup';
 
 // Sign up form
