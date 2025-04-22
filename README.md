@@ -1,6 +1,6 @@
 This is our 4300 Web Programming final project. 
 
-Contributors
+Contributors:
 Meghana Madduri
 McKayla McIntosh
 Savannah Milburn
