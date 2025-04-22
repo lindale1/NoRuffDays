@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 This is our 4300 Web Programming final project. 
 
 Contributors:
@@ -6,9 +6,7 @@ Meghana Madduri,
 McKayla McIntosh,
 Savannah Milburn,
 Linda Le
-=======
-This is our 4300 Web Programming final project 
->>>>>>> 625ea95 (page not found)
+===
 
 Project Goal
 Your team will design and build a full-stack web application using React, Next.js, Nodejs, MongoDB, and implement authentication and authorization. The final product should not only demonstrate your ability to implement these technical requirements but also solve a problem or provide a unique service to UGA students.
