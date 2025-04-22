@@ -1,12 +1,16 @@
+// index.ts used for authentication and authorization
 'use server'
 
 import { signIn, signOut } from "../auth";
 
+// Signs out user
 export async function doLogout() {
     await signOut({ redirectTo: "/"});
-}
+} // doLogout
 
+// Calls for credentials to login user
 export async function doCredentialLogin(formData: FormData): Promise<any> {
+    // Get email and password
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
@@ -19,5 +23,5 @@ export async function doCredentialLogin(formData: FormData): Promise<any> {
         return response;
     } catch (err: any) {
         throw err;
-    }
-}
+    } // try-catch
+} // doCredentialLogin

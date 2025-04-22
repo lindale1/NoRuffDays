@@ -1,3 +1,4 @@
+// Page for /login client route
 import Login from "../../components/Login";
 
 export default function LoginPage() {

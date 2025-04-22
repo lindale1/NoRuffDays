@@ -1,8 +1,10 @@
+// Handle signup process for a user using POST request for auth
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import User from "@/models/UserSchema";
 import connectMongoDB from "../../../../config/mongodb";
 
+// Using POST request 
 export async function POST(req: Request) {
   try {
     await connectMongoDB();
@@ -29,4 +31,4 @@ export async function POST(req: Request) {
     console.error("Signup error:", error);
     return NextResponse.json({ message: "Internal server error" }, { status: 500 });
   }
-}
+} // POST
