@@ -29,12 +29,12 @@ function Login() {
     });
 
     if (res?.error) {
-      setError("Invalid credentials. If you're new, please sign up!");
-      setLoading(false);
+      router.push("/not-found");
       return;
     } 
-    router.push("/");
+
     setLoading(false);
+    router.push("/");
   };
 
 

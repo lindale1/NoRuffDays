@@ -2,12 +2,14 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [userExists, setUserExists] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,8 +30,13 @@ const Signup = () => {
       const data = await response.json();
 
       if (!response.ok) {
-       setError(data.message || "Something went wrong");
-       return;
+        if (data.message === "User already exists") {
+          setUserExists(true);
+          setError("User already exists. Try logging in instead.");
+        } else {
+          setError(data.message || "Something went wrong");
+        }
+        return;
       }
 
       alert("Signup successful");
@@ -45,6 +52,11 @@ const Signup = () => {
       <div className="flex flex-col justify-center items-center text-center rounded-2xl p-6">
         <h2 className="text-2xl font-bold mb-2">Sign up today!</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
+        {userExists && (
+          <p className="text-blue-600 underline mb-4">
+            <Link href="/login">Already have an account? Log in here.</Link>
+          </p>
+        )}
         <form className="w-full max-w-sm space-y-4" onSubmit={handleSubmit}>
           <input
             type="text"
