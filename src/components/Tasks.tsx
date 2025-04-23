@@ -18,6 +18,32 @@ interface TaskType {
 const Tasks = () => {
      // Storing tasks
     const [tasks, setTasks] = useState<TaskType[]>([]);
+
+    // Statically loading 3 dummy tasks 
+    const dummyTasks = [
+        {
+            _id: '1',
+            title: 'Clean',
+            description: 'This is a completed dummy task.',
+            imageUrl: '',
+            completed: true,
+        }, 
+        {
+            _id: '2', 
+            title: 'Do homework',
+            description: 'This is a completed dummy task.',
+            imageUrl: '',
+            completed: true,
+        }, 
+        {
+            _id: '3',
+            title: 'Read',
+            description: 'This is a completed dummy task.',
+            imageUrl: '',
+            completed: true,
+        }
+    ]; // dummyTasks
+
     // Fetch tasks on /api/tasks route 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -27,7 +53,7 @@ const Tasks = () => {
                   throw new Error('Network response was not ok');
                 } // if
                 const data = await response.json();
-                 setTasks(data.tasks);
+                setTasks([...dummyTasks, ...data.tasks]);
             } catch (error) {
                 console.log('Error fetching tasks:', error);
             } // try-catch
