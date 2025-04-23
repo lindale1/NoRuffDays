@@ -46,7 +46,7 @@ const ContactPage = () => {
           <div className="flex flex-col items-center">
             <div className="text-4xl mb-2">📧</div>
             <p className="font-semibold">Email:</p>
-            <p className="text-sm">help@noruftdays.com</p>
+            <p className="text-sm">help@noruffdays.com</p>
           </div>
           <div className="flex flex-col items-center">
             <div className="text-4xl mb-2">📍</div>

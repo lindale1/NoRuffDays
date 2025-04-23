@@ -1,9 +1,8 @@
-// Page for task tracker where we can add code from 
-
+// Page for task tracker where tasks are displayed and CRUD operations occur
 "use client";
 
 import { useEffect, useState } from 'react';
-import AuthHeader from '../../components/AuthHeader';
+import Header from '../../components/Header';
 import Tasks from '../../components/Tasks';
 
 export default function TaskTracker() {
@@ -62,7 +61,7 @@ export default function TaskTracker() {
 
   return (
     <div className="min-h-screen bg-slate-800 text-white">
-      <AuthHeader />
+      <Header />
       <div className="text-center p-4 text-lg font-semibold bg-slate-700 space-y-1">
         {/* date */}
         <div>{currentDate}</div>

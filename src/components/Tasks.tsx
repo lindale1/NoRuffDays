@@ -135,6 +135,20 @@ const Tasks = () => {
     const toDoTasks = tasks.filter(task => !task.completed);
     const completedTasks = tasks.filter(task => task.completed);
 
+    // Handle clearing the completed task for the clear completed tasks button
+    const handleClearCompleted = async () => {
+        try {
+        // Delete each completed task
+        await Promise.all(completedTasks.map(task => fetch(`/api/tasks/${task._id}`, {
+                method: 'DELETE',
+        })));
+        // Remove completed tasks
+        setTasks(tasks.filter(task => !task.completed));
+        } catch (error) {
+          console.error("Error clearing completed tasks:", error);
+        } // try-catch
+    }; // handleClearCompleted
+
     return (
         <section className="px-6 py-12">
             <div className="container-xl m-auto flex gap-6">
@@ -170,10 +184,16 @@ const Tasks = () => {
                                 <div className="space-y-4">
                                     {completedTasks.map(task => (
                                         <Card key={task._id} className="p-4 bg-white rounded-lg shadow-md">
-                                            <h2 className="text-lg font-semibold line-through">{task.title}</h2>
+                                            <h2 className="text-lg text-black font-semibold line-through">{task.title}</h2>
                                             <p className="text-gray-600">{task.description}</p>
                                         </Card>
                                     ))}
+                                    <div className="mt-4 flex justify-end">
+                                        <button onClick={handleClearCompleted} className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded"
+                                        >
+                                            Clear Completed
+                                        </button>
+                                    </div>
                                 </div>
                             )}
                     </Card>
