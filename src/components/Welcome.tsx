@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import dog from '../app/assets/dog.png';
+import dog from '../app/assets/dogLogo.png';
 
 // Font
 import { Playfair_Display } from 'next/font/google';
@@ -30,7 +30,7 @@ const Welcome = () => {
     <div className="mt-4 flex justify-center items-center">
       <Image 
         src={dog}
-        width={313}
+        width={400}
         height={339}
         alt="UGA dog"
       />
